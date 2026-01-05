@@ -1,0 +1,7 @@
+/vendor
+.env
+.DS_STORE
+/.vscode
+/.idea
+data
+docker/db_data
