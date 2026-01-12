@@ -9,7 +9,8 @@
     "respect/validation": "^2.2",
     "illuminate/pagination": "^10.38",
     "aws/aws-sdk-php": "^3.294",
-    "tuupola/cors-middleware": "^1.4"
+    "tuupola/cors-middleware": "^1.4",
+    "lukasoppermann/http-status": "^4.0"
   },
   "autoload": {
     "psr-4": {
