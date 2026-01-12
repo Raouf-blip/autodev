@@ -27,7 +27,7 @@ services:
     database:
         image: mysql
         # image: mariadb:11 # it's up to you to choose mysql or mariadb
-        # user: "${UID}:${GID}" # uncomment this line if you want to set the user to match host user
+        user: "1000:1000" # uncomment this line if you want to set the user to match host user
         restart: always
         environment:
             MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWD:-password}
@@ -38,6 +38,13 @@ services:
             - ./docker/db_data:/var/lib/mysql
         ports:
             - "${DB_PORT:-3306}:3306"
+
+    node:
+        image: node:20-alpine
+        working_dir: /var/www/html
+        volumes:
+            - ./:/var/www/html
+        command: sh -c "npm install && npm run dev"
 
 volumes:
     db-data:

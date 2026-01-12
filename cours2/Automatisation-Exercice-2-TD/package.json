@@ -1,0 +1,22 @@
+{
+  "name": "html",
+  "version": "1.0.0",
+  "description": "Ce projet est un petit annuaire d'entreprises.   Il permet de lister plusieurs entreprises, et d'en voir leur bureaux et employées.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint assets/*.js",
+    "lint:fix": "eslint assets/*.js --fix"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^8.57.1",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.32.0",
+    "sass": "^1.97.2",
+    "vite": "^7.3.1"
+  }
+}

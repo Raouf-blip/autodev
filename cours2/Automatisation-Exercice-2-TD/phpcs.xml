@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<ruleset name="Custom">
+    <description>Configuration PHPCS</description>
+    
+    <file>src</file>
+    <file>config</file>
+    
+    <exclude-pattern>vendor/</exclude-pattern>
+    
+    <rule ref="PSR12"/>
+</ruleset>
