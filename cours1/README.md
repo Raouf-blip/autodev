@@ -1,10 +1,26 @@
-# Temirov Abdoul-Raouf
-# Blonbou Mathys
+# Projet Immobilier - Cours 1
 
+Temirov Abdoul-Raouf, Blonbou Mathys, Audinot Noah
 
-Lancer les containers:
-docker-compose up --build -d
+## Lancer les projets
 
-Note: Il manquera une dépendance (erreur php), l'importer grâce à composer:
-docker compose exec php composer require lukasoppermann/http-status
-composer update
+### API PHP
+```bash
+cd immo-api-php
+docker compose up -d --build
+```
+http://localhost:8080
+
+### Client Vue
+```bash
+cd immo-client-vue
+docker compose up -d
+```
+http://localhost:3000
+
+### Admin React
+```bash
+cd immo-admin-react
+docker compose up -d
+```
+http://localhost:3001
