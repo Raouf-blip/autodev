@@ -121,3 +121,12 @@ Il faudra aussi définir la variable d’environnement :
 ```bash
 export XDEBUG_MODE=coverage
 ```
+
+### Tips
+
+Servez vous des rapports de code coverage pour vérifier la pertinence de vos tests.
+
+Si vous rencontrer l'erreur :
+> No code coverage driver available
+
+C'est que vous n'avez pas l'extention XDebug de configuré avec PHP. Pour l'ajouter suivez le [guide d'installation](https://xdebug.org/docs/install) pour votre OS.

@@ -57,7 +57,7 @@ docker compose run --rm php composer phpstan
 
 ## Attendu
 
-Vous devrez écrire les tests pour couvrir l'intégralité des use case de ce projet.
+Vous devrez écrire les tests pour couvrir toutes les fonctions de la classe Calculator.php et afficher un rapport de code coverage à 100%. Un exercice plus complet sera vu en TD.
 
 ### Tips
 
