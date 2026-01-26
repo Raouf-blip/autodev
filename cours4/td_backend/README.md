@@ -13,12 +13,14 @@ docker compose up
 
 ## Initialisation de la base de données + Peuplement
 ```bash
-# Todo...
+docker compose exec php php bin/console doctrine:migrations:migrate
+docker compose exec php php bin/console doctrine:fixtures:load
 ````
 
 ## Accès aux vues :
-// TODO ...
-
+```bash
+http://localhost:8080/real
+http://localhost:8080/film
 ---
 
 
