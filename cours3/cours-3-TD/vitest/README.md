@@ -26,7 +26,7 @@ docker compose run --rm node npm install
 docker compose up -d
 ```
 
-### Compile and Hot-Reload for Development
+### Compiler
 
 ```sh
 docker compose run --rm node npm run test 
@@ -43,31 +43,16 @@ docker compose run --rm node npm run test
 // ou "exec" si votre container tourne déja
 ```
 
-### Run Unit Tests with [Vitest](https://vitest.dev/) and [Istanbul](https://istanbul.js.org/) for coverage
-
+### Lancer les tests
 ```sh
 docker compose run --rm node npm run test:coverage
 // ou "exec" si votre container tourne déja
 ```
 
-### Run Unit Tests with [Vitest UI](https://vitest.dev/guide/ui.html)
+### Lancer les tests
 
 ```sh
 docker compose run --rm node npm run test:ui
-// ou "exec" si votre container tourne déja
-```
-
-### (facultatif) Lint with [ESLint](https://eslint.org/)
-
-```sh
-docker compose run --rm node npm run lint
-// ou "exec" si votre container tourne déja
-```
-
-### (facultatif) Format with [Prettier](https://prettier.io/)
-
-```sh
-docker compose run --rm node npm run format
 // ou "exec" si votre container tourne déja
 ```
 

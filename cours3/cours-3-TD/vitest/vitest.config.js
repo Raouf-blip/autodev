@@ -10,9 +10,13 @@ export default mergeConfig(
       exclude: [...configDefaults.exclude, 'e2e/*'],
       root: fileURLToPath(new URL('./', import.meta.url)),
       coverage: {
-        provider: 'istanbul', // or 'v8'
-        reporter: ['html']
-        // Todo : completer la configuration
+        provider: 'istanbul',
+        reporter: ['html'],
+        exclude: [
+          ...configDefaults.coverage.exclude,
+          '.eslintrc.cjs',
+          'src/main.js'
+        ]
       }
     }
   })

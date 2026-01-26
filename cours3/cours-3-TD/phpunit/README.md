@@ -21,7 +21,7 @@ docker compose run --rm php composer install
 
 ## Script
 
-### Run test with [PHPUnit](https://phpunit.de/)
+### Lancer les tests
 
 ```sh
 docker compose run --rm php composer test
@@ -59,12 +59,3 @@ docker compose run --rm php composer phpstan
   - **Entity** : Contient les classes entités du projet
 - **tests** : Contient le code source des tests
 - **coverage** : Dossier contentant les rapports de test coverage
-
-### Tips
-
-Servez vous des rapports de code coverage pour vérifier la pertinence de vos tests.
-
-Si vous rencontrer l'erreur :
-  > No code coverage driver available
-
-C'est que vous n'avez pas l'extention XDebug de configuré avec PHP. Pour l'ajouter suivez le [guide d'installation](https://xdebug.org/docs/install) pour votre OS.
