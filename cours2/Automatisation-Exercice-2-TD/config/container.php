@@ -12,7 +12,7 @@ return [
         return require __DIR__ . '/settings.php';
     },
     'db' => function (ContainerInterface $container) {
-        $capsule = new \Illuminate\Database\Capsule\Manager;
+        $capsule = new \Illuminate\Database\Capsule\Manager();
         $capsule->addConnection($container->get('settings')['db']);
 
         $capsule->setAsGlobal();
@@ -40,7 +40,7 @@ return [
             (bool)$settings['log_error_details']
         );
     },
-    'view' => function(ContainerInterface $container) {
+    'view' => function (ContainerInterface $container) {
         $viewPath = $container->get('settings')['view'];
         $twig = Twig::create($viewPath, ['cache' => false]);
 

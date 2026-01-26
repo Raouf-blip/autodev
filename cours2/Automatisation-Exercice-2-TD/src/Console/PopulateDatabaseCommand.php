@@ -5,7 +5,7 @@ namespace App\Console;
 use App\Models\Company;
 use App\Models\Employee;
 use App\Models\Office;
-use Illuminate\Support\Facades\Schema;
+use Faker\Factory;
 use Slim\App;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -27,47 +27,81 @@ class PopulateDatabaseCommand extends Command
         $this->setDescription('Populate database');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output ): int
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $output->writeln('Populate database...');
 
         /** @var \Illuminate\Database\Capsule\Manager $db */
         $db = $this->app->getContainer()->get('db');
 
+        // Vider les tables
         $db->getConnection()->statement("SET FOREIGN_KEY_CHECKS=0");
         $db->getConnection()->statement("TRUNCATE `employees`");
         $db->getConnection()->statement("TRUNCATE `offices`");
         $db->getConnection()->statement("TRUNCATE `companies`");
         $db->getConnection()->statement("SET FOREIGN_KEY_CHECKS=1");
 
+        // Initialiser Faker avec la locale française
+        $faker = Factory::create('fr_FR');
 
-        $db->getConnection()->statement("INSERT INTO `companies` VALUES
-    (1,'Stack Exchange','0601010101','stack@exchange.com','https://stackexchange.com/','https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Verisure_information_technology_department_at_Ch%C3%A2tenay-Malabry_-_2019-01-10.jpg/1920px-Verisure_information_technology_department_at_Ch%C3%A2tenay-Malabry_-_2019-01-10.jpg', now(), now(), null),
-    (2,'Google','0602020202','contact@google.com','https://www.google.com','https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Google_office_%284135991953%29.jpg/800px-Google_office_%284135991953%29.jpg?20190722090506',now(), now(), null)
-        ");
+        // Générer 2 à 4 sociétés
+        $nbCompanies = rand(2, 4);
+        $output->writeln("Génération de $nbCompanies sociétés...");
 
-        $db->getConnection()->statement("INSERT INTO `offices` VALUES
-    (1,'Bureau de Nancy','1 rue Stanistlas','Nancy','54000','France','nancy@stackexchange.com',NULL,1, now(), now()),
-    (2,'Burea de Vandoeuvre','46 avenue Jeanne d\'Arc','Vandoeuvre','54500','France',NULL,NULL,1, now(), now()),
-    (3,'Siege sociale','2 rue de la primatiale','Paris','75000','France',NULL,NULL,2, now(), now()),
-    (4,'Bureau Berlinois','192 avenue central','Berlin','12277','Allemagne',NULL,NULL,2, now(), now())
-        ");
+        for ($i = 0; $i < $nbCompanies; $i++) {
+            // Créer une société
+            $company = new Company();
+            $company->name = $faker->company();
+            $company->phone = $faker->phoneNumber();
+            $company->email = $faker->companyEmail();
+            $company->website = $faker->url();
+            $company->image = $faker->imageUrl(800, 600, 'business', true);
+            $company->save();
 
-        $db->getConnection()->statement("INSERT INTO `employees` VALUES
-     (1,'Camille','La Chenille',1,'camille.la@chenille.com',NULL,'Ingénieur', now(), now()),
-     (2,'Albert','Mudhat',2,'albert.mudhat@aqume.net',NULL,'Superviseur', now(), now()),
-     (3,'Sylvie','Tesse',3,'sylive.tesse@factice.local',NULL,'PDG', now(), now()),
-     (4,'John','Doe',4,'john.doe@generique.org',NULL,'Testeur', now(), now()),
-     (5,'Jean','Bon',1,'jean@test.com',NULL,'Developpeur', now(), now()),
-     (6,'Anais','Dufour',2,'anais@aqume.net',NULL,'DBA', now(), now()),
-     (7,'Sylvain','Poirson',3,'sylvain@factice.local',NULL,'Administrateur réseau', now(), now()),
-     (8,'Telma','Thiriet',4,'telma@generique.org',NULL,'Juriste', now(), now())
-        ");
+            $output->writeln("  - Société créée : {$company->name}");
 
-        $db->getConnection()->statement("update companies set head_office_id = 1 where id = 1;");
-        $db->getConnection()->statement("update companies set head_office_id = 3 where id = 2;");
+            // Générer 2 à 3 bureaux pour cette société
+            $nbOffices = rand(2, 3);
+            $offices = [];
 
-        $output->writeln('Database created successfully!');
+            for ($j = 0; $j < $nbOffices; $j++) {
+                $office = new Office();
+                $office->name = $faker->randomElement(['Siège social', 'Bureau', 'Agence']) . ' ' . $faker->city();
+                $office->address = $faker->streetAddress();
+                $office->city = $faker->city();
+                $office->zip_code = $faker->postcode();
+                $office->country = $faker->country();
+                $office->email = $faker->email();
+                $office->phone = $faker->phoneNumber();
+                $office->company_id = $company->id;
+                $office->save();
+
+                $offices[] = $office;
+                $output->writeln("    - Bureau créé : {$office->name}");
+
+                // Générer 3 à 4 employés par bureau
+                $nbEmployees = rand(3, 4);
+
+                for ($k = 0; $k < $nbEmployees; $k++) {
+                    $employee = new Employee();
+                    $employee->first_name = $faker->firstName();
+                    $employee->last_name = $faker->lastName();
+                    $employee->email = $faker->email();
+                    $employee->phone = $faker->phoneNumber();
+                    $employee->job_title = $faker->jobTitle();
+                    $employee->office_id = $office->id;
+                    $employee->save();
+                }
+            }
+
+            // Définir le premier bureau comme siège social
+            if (!empty($offices)) {
+                $company->head_office_id = $offices[0]->id;
+                $company->save();
+            }
+        }
+
+        $output->writeln('Base de données peuplée avec succès !');
         return 0;
     }
 }
