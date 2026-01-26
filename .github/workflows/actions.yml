@@ -17,7 +17,7 @@ jobs:
       - name: Copy .env
         run: |
           echo "cp .env"
-          cp ../../cours4/td_backend/.env.ci ../../cours4/td_backend/.env
+          cp /cours4/td_backend/.env.ci /cours4/td_backend/.env
       - name: Install Dependencies
         run: |
           echo "Install Dependencies"
