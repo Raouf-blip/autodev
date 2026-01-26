@@ -6,5 +6,24 @@ xsi:noNamespaceSchemaLocation="./vendor/phpunit/phpunit/phpunit.xsd"
 bootstrap="vendor/autoload.php"
 colors="true">
 
-    <!-- Todo : completer la configuration -->
+    <!-- Répertoires de tests -->
+    <testsuites>
+        <testsuite name="Unit Tests">
+            <directory>./tests</directory>
+        </testsuite>
+    </testsuites>
+
+    <!-- Configuration de la couverture de code -->
+    <coverage>
+        <include>
+            <directory suffix=".php">./src</directory>
+        </include>
+        <exclude>
+            <directory>./vendor</directory>
+            <directory>./tests</directory>
+        </exclude>
+        <report>
+            <html outputDirectory="tests/logs/coverage" />
+        </report>
+    </coverage>
 </phpunit>
