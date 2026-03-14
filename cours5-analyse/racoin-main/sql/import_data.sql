@@ -11,21 +11,6 @@ VALUES
 UNLOCK TABLES;
 
 
-LOCK TABLES `photo` WRITE;
-/*!40000 ALTER TABLE `photo` DISABLE KEYS */;
-
-INSERT INTO `photo` (`id_photo`, `id_annonce`, `url_photo`)
-VALUES
-    (1,1,'http://www.routard.com/images_contenu/communaute/Photos/publi/029/pt28199.jpg'),
-    (2,1,'http://www.routard.com/images_contenu/communaute/Photos/publi/029/pt28199.jpg'),
-    (3,2,'http://www.routard.com/images_contenu/communaute/Photos/publi/029/pt28199.jpg'),
-    (4,2,'http://www.routard.com/images_contenu/communaute/Photos/publi/029/pt28199.jpg'),
-    (5,2,'http://www.routard.com/images_contenu/communaute/Photos/publi/029/pt28199.jpg');
-
-/*!40000 ALTER TABLE `photo` ENABLE KEYS */;
-UNLOCK TABLES;
-
-
 LOCK TABLES `departement` WRITE;
 /*!40000 ALTER TABLE `departement` DISABLE KEYS */;
 
@@ -78,12 +63,31 @@ LOCK TABLES `annonce` WRITE;
 
 INSERT INTO `annonce` (`id_annonce`, `id_categorie`, `id_sous_categorie`, `id_annonceur`, `id_departement`, `prix`, `date`, `titre`, `description`, `ville`, `mdp`)
 VALUES
-    (1,1,1,1,1,35,'2014-12-15','Titre de l\'annonce 1','Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab alias asperiores, corporis distinctio dolorem\ndolores facere iure, laboriosam minima nostrum odit praesentium, quaerat quia reprehenderit soluta totam\nvoluptatem. Corporis, nemo.\nLorem ipsum dolor sit amet, consectetur adipisicing elit. Ab alias asperiores, corporis distinctio dolorem\ndolores facere iure, laboriosam minima nostrum odit praesentium, quaerat quia reprehenderit soluta totam\nvoluptatem. Corporis, nemo.','Bar-le-Duc','azerty'),
-    (2,2,2,2,3,99,'2014-12-16','Titre de l\'annonce 2','Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab alias asperiores, corporis distinctio dolorem\ndolores facere iure, laboriosam minima nostrum odit praesentium, quaerat quia reprehenderit soluta totam\nvoluptatem. Corporis, nemo.','Metz','didierchantal'),
-    (3,3,3,3,5,17.35,'2014-12-17','Titre de l\'annonce 3','Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab alias asperiores, corporis distinctio dolorem\ndolores facere iure, laboriosam minima nostrum odit praesentium, quaerat quia reprehenderit soluta totam\nvoluptatem. Corporis, nemo.\nLorem ipsum dolor sit amet, consectetur adipisicing elit. Ab alias asperiores, corporis distinctio dolorem\ndolores facere iure, laboriosam minima nostrum odit praesentium, quaerat quia reprehenderit soluta totam\nvoluptatem. Corporis, nemo.\nLorem ipsum dolor sit amet, consectetur adipisicing elit. Ab alias asperiores, corporis distinctio dolorem\ndolores facere iure, laboriosam minima nostrum odit praesentium, quaerat quia reprehenderit soluta totam\nvoluptatem. Corporis, nemo.','Jjefifi','sauder54');
+    -- mdp = password_hash('azerty', PASSWORD_DEFAULT)
+    (1,1,1,1,1,35,'2014-12-15','Titre de l\'annonce 1','Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab alias asperiores, corporis distinctio dolorem\ndolores facere iure, laboriosam minima nostrum odit praesentium, quaerat quia reprehenderit soluta totam\nvoluptatem. Corporis, nemo.\nLorem ipsum dolor sit amet, consectetur adipisicing elit. Ab alias asperiores, corporis distinctio dolorem\ndolores facere iure, laboriosam minima nostrum odit praesentium, quaerat quia reprehenderit soluta totam\nvoluptatem. Corporis, nemo.','Bar-le-Duc','$2y$10$TPbFhSHyee3WsW2uvfTMHO2hc9fXQEd6TssjU1GH3z0aWeUfeV8MW'),
+    -- mdp = password_hash('didierchantal', PASSWORD_DEFAULT)
+    (2,2,2,2,3,99,'2014-12-16','Titre de l\'annonce 2','Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab alias asperiores, corporis distinctio dolorem\ndolores facere iure, laboriosam minima nostrum odit praesentium, quaerat quia reprehenderit soluta totam\nvoluptatem. Corporis, nemo.','Metz','$2y$10$z6dwiGTSlobrAFaMvUO2Vu6kRFoC50cmEhG.4jFQuZU.1so6kE.wu'),
+    -- mdp = password_hash('sauder54', PASSWORD_DEFAULT)
+    (3,3,3,3,5,17.35,'2014-12-17','Titre de l\'annonce 3','Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab alias asperiores, corporis distinctio dolorem\ndolores facere iure, laboriosam minima nostrum odit praesentium, quaerat quia reprehenderit soluta totam\nvoluptatem. Corporis, nemo.\nLorem ipsum dolor sit amet, consectetur adipisicing elit. Ab alias asperiores, corporis distinctio dolorem\ndolores facere iure, laboriosam minima nostrum odit praesentium, quaerat quia reprehenderit soluta totam\nvoluptatem. Corporis, nemo.\nLorem ipsum dolor sit amet, consectetur adipisicing elit. Ab alias asperiores, corporis distinctio dolorem\ndolores facere iure, laboriosam minima nostrum odit praesentium, quaerat quia reprehenderit soluta totam\nvoluptatem. Corporis, nemo.','Jjefifi','$2y$10$nJfKnBK2srgubr1oNLXqxeXj1LRj9lX9clqf/ZqCcHnWvswPT0Nzu');
 
 /*!40000 ALTER TABLE `annonce` ENABLE KEYS */;
 UNLOCK TABLES;
+
+
+LOCK TABLES `photo` WRITE;
+/*!40000 ALTER TABLE `photo` DISABLE KEYS */;
+
+INSERT INTO `photo` (`id_photo`, `id_annonce`, `url_photo`)
+VALUES
+    (1,1,'http://www.routard.com/images_contenu/communaute/Photos/publi/029/pt28199.jpg'),
+    (2,1,'http://www.routard.com/images_contenu/communaute/Photos/publi/029/pt28199.jpg'),
+    (3,2,'http://www.routard.com/images_contenu/communaute/Photos/publi/029/pt28199.jpg'),
+    (4,2,'http://www.routard.com/images_contenu/communaute/Photos/publi/029/pt28199.jpg'),
+    (5,2,'http://www.routard.com/images_contenu/communaute/Photos/publi/029/pt28199.jpg');
+
+/*!40000 ALTER TABLE `photo` ENABLE KEYS */;
+UNLOCK TABLES;
+
 
 LOCK TABLES `sous_categorie` WRITE;
 /*!40000 ALTER TABLE `sous_categorie` DISABLE KEYS */;

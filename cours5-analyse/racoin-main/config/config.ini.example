@@ -1,0 +1,8 @@
+driver=mysql
+host=db
+database=racoin
+username=racoin
+password=racoin
+charset=utf8
+collation=utf8_unicode_ci
+prefix=

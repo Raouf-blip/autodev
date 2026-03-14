@@ -11,12 +11,12 @@
                 <h2>Vous allez être redirigé.</h2>
             {% else %}
                 <form action="" method="post">
-                    <h3>Mot de passe de l'annonce "{{ annonce.titre | raw }}"</h3>
+                    <h3>Mot de passe de l'annonce "{{ annonce.titre }}"</h3>
                     <br/>
                     <input class="align-center" type="password" name="pass"/><br/>
                     <input type="submit" value="Envoyer">
                 </form>
-                <h5>mot de passe incorrecte</h5>
+                <h5>Mot de passe incorrect</h5>
                 <script src="{{ chemin }}js/del.js"></script>
             {% endif %}
 

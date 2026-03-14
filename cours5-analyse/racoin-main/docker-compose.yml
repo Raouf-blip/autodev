@@ -1,10 +1,46 @@
 version: '3.8'
 services:
-  php: 
+  php:
     build: './docker/php'
     user: ${UID:-1000}:${GID:-1000}
     ports:
       - ${PHP_PORT:-8080}:80
     volumes:
       - ./:/var/www/html
+    depends_on:
+      db:
+        condition: service_healthy
     command: php -S 0.0.0.0:80 -t .
+
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: racoin
+      MYSQL_USER: racoin
+      MYSQL_PASSWORD: racoin
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./sql/create_schema.sql:/docker-entrypoint-initdb.d/01-schema.sql
+      - ./sql/import_data.sql:/docker-entrypoint-initdb.d/02-data.sql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: db
+      PMA_USER: racoin
+      PMA_PASSWORD: racoin
+    depends_on:
+      - db
+
+volumes:
+  db_data:

@@ -8,9 +8,10 @@ use Illuminate\Container\Container;
 
 class connection {
 
-    public static function createConn() {
+    public static function createConn(): void {
         $capsule = new DB;
         $capsule->addConnection(parse_ini_file("./config/config.ini"));
+        $capsule->setEventDispatcher(new Dispatcher(new Container));
         $capsule->setAsGlobal();
         $capsule->bootEloquent();
     }

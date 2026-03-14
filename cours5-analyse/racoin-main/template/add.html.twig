@@ -5,7 +5,7 @@
     <div class="columns md-8 md-center">
         <div class="add-item add-form">
             <form method="post" action="">
-                <input type="hidden" name="<?php echo $token; ?>">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
 
                 <fieldset id="coordonnee">
                     <legend>Vos coordonnées</legend>
@@ -24,7 +24,7 @@
 
                     <label for="departement" class="departementLabel"></label>
                     <select name="departement">
-                        <option>Choississez un département</option>
+                        <option>Choisissez un département</option>
                         <option>-----</option>
                         {% for d in departements %}
                             <option value="{{ d.id_departement }}">{{ d.nom_departement }}</option>
@@ -38,7 +38,7 @@
 
                     <label for="categorie" class="categorieLabel"></label>
                     <select name="categorie" id="categorie">
-                        <option>Choississez une catégorie</option>
+                        <option>Choisissez une catégorie</option>
                         <option>-----</option>
                         {% for cat in categories %}
                             <option value="{{ cat.id_categorie }}">{{ cat.nom_categorie }}</option>
