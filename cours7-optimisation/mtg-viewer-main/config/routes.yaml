@@ -1,0 +1,12 @@
+controllers:
+    resource:
+        path: ../src/Controller/
+        namespace: App\Controller
+    type: attribute
+
+
+vuejs:
+    path: '/{fallbackRoute}'
+    controller: App\Controller\VueJsController
+    requirements:
+        fallbackRoute: '.*'

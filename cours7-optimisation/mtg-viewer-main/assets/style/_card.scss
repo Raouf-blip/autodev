@@ -1,0 +1,26 @@
+.card {
+
+    margin-bottom: 20px;
+
+    .card-property {
+        display: flex;
+
+        .value {
+            margin-left: 10px;
+            font-weight: lighter;
+        }
+    }
+
+    .card-property-text {
+        font-style: italic;
+        font-family: inherit;
+        font-weight: lighter;
+        font-size: 1.2em;
+    }
+
+}
+
+.card-result {
+    margin-bottom: 20px;
+
+}
